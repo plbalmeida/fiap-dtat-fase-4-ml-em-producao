@@ -3,10 +3,12 @@ from pydantic import BaseModel, ValidationError
 
 app = Flask(__name__)
 
+
 # Modelo de validação para dados do usuário
 class UserModel(BaseModel):
     name: str
     age: int
+
 
 @app.route("/users", methods=["POST"])
 def create_user():
@@ -21,6 +23,7 @@ def create_user():
     except ValidationError as e:
         # Retorna erros de validação
         return jsonify({"errors": e.errors()}), 400
+
 
 if __name__ == "__main__":
     app.run(debug=True)
