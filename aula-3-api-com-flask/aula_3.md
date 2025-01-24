@@ -50,3 +50,111 @@ De acordo com o livro *HTTP: The Definitive Guide*, o protocolo HTTP possui as s
 
 Essas características tornam o protocolo HTTP flexível e amplamente utilizado como o principal protocolo para a web moderna. 
 
+## Arquitetura REST 
+
+**REST** é um tipo de arquitetura de software desenvolvido para sistemas distribuídos, principalmente para web. Esse conceito foi apresentado em 2000 por Roy Fielding, em sua tese de doutorado chamada *Architectural Styles and the Design of Network-based Software Architectures*, na Universidade da Califórnia. 
+
+Roy Fielding é um cientista da computação que, junto de outros pesquisadores, ajudou a escrever a especificação do protocolo HTTP. Na tese dele, o REST é descrito como um conjunto de restrições arquiteturais que, quando aplicadas a um sistema, ajudam a criar uma arquitetura mais escalável, eficiente e confiável. A ideia principal é tratar tudo como um recurso, que pode ser representado e manipulado por uma interface padrão, usando os métodos do HTTP, tipo GET, POST, PUT e DELETE. 
+
+A arquitetura REST foi pensada pelo Roy para resolver problemas de complexidade, falta de padronização e dificuldade de escalabilidade na comunicação entre sistemas distribuídos. Antes da REST, as integrações eram frequentemente baseadas em protocolos proprietários ou soluções pesadas, dificultando a interoperabilidade e a evolução dos sistemas. A REST surgiu como uma solução simples e flexível, utilizando o HTTP como base e estabelecendo princípios claros, como identificação de recursos por URIs, interface uniforme e comunicação sem estado, permitindo maior eficiência e escalabilidade na web. 
+
+Um exemplo prático de como  a REST melhorou a comunicação na web é o caso das APIs de serviços de mapas, como o Google Maps. Antes da REST, integrar serviços de mapas em uma aplicação exigia protocolos complexos, arquivos grandes de dados geográficos ou software específico instalado no cliente. Isso tornava o processo lento e dependente de soluções proprietárias. 
+
+Com a REST, o Google Maps disponibiliza uma API onde cada recurso (como um mapa, rota ou ponto de interesse) é acessado por uma URI. Por exemplo, para obter informações sobre a rota entre dois endereços, basta fazer uma requisição HTTP como a seguir: 
+
+```bash 
+GET https://maps.googleapis.com/maps/api/directions/json?origin=São+Paulo&destination=Rio+de+Janeiro 
+``` 
+
+A resposta vem em formato JSON, padronizado e fácil de manipular, contendo as informações da rota:  
+
+```bash 
+{ 
+  "geocoded_waypoints": [ 
+    { 
+      "geocoder_status": "OK", 
+      "place_id": "ChIJd7zN_thzj5QRFEWG1k9gJ08", 
+      "types": ["locality", "political"] 
+    }, 
+    { 
+      "geocoder_status": "OK", 
+      "place_id": "ChIJW-T2Wt7_oQAR7zcnxwYQYmU", 
+      "types": ["locality", "political"] 
+    } 
+  ], 
+  "routes": [ 
+    { 
+      "bounds": { 
+        "northeast": { 
+          "lat": -21.2032, 
+          "lng": -41.7388 
+        }, 
+        "southwest": { 
+          "lat": -23.5505, 
+          "lng": -46.6333 
+        } 
+      }, 
+      "legs": [ 
+        { 
+          "distance": { 
+            "text": "429 km", 
+            "value": 429000 
+          }, 
+          "duration": { 
+            "text": "5 hours 42 mins", 
+            "value": 20520 
+          }, 
+          "start_address": "São Paulo, SP, Brazil", 
+          "end_address": "Rio de Janeiro, RJ, Brazil", 
+          "start_location": { 
+            "lat": -23.5505, 
+            "lng": -46.6333 
+          }, 
+          "end_location": { 
+            "lat": -22.9068, 
+            "lng": -43.1729 
+          }, 
+          "steps": [ 
+            { 
+              "distance": { 
+                "text": "3.4 km", 
+                "value": 3400 
+              }, 
+              "duration": { 
+                "text": "5 mins", 
+                "value": 300 
+              }, 
+              "html_instructions": "Head northwest on Avenida Paulista", 
+              "start_location": { 
+                "lat": -23.5505, 
+                "lng": -46.6333 
+              }, 
+              "end_location": { 
+                "lat": -23.5478, 
+                "lng": -46.6286 
+              }, 
+              "travel_mode": "DRIVING" 
+            }, 
+            // Outros passos omitidos para simplificação 
+          ] 
+        } 
+      ], 
+      "overview_polyline": { 
+        "points": "encodedPolylineString" 
+      }, 
+      "summary": "BR-116" 
+    } 
+  ], 
+  "status": "OK" 
+} 
+```
+
+Esse formato de resposta simplifica a integração, permite que qualquer linguagem ou plataforma com suporte a HTTP consuma o serviço e melhora a experiência do desenvolvedor e do usuário final. 
+
+## O que é Flask? 
+
+Flask (https://flask.palletsprojects.com/en/stable/) é uma biblioteca em Python que facilita o desenvolvimento de APIs REST. Ele fornece o essencial para o desenvolvimento de APIs, permitindo flexibilidade para adicionar bibliotecas conforme a necessidade do projeto. 
+
+A biblioteca Flask é simples sendo ideal para iniciantes, é flexível pois permite controlar quais funcionalidades serão adicionadas, e possui ampla adesão da comunidade, com forte suporte e boa documentação. 
+
+ 
