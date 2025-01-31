@@ -26,6 +26,10 @@ Acesse o endpoint correspondente (http://127.0.0.1:5000/).
 
 Teste do exemplo da rota com código 200: 
 
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/" -Method Get
+```
+
 ```bash 
 curl http://127.0.0.1:5000/ 
 ``` 
@@ -42,6 +46,10 @@ Resposta da requisição esperada:
 ``` 
 
 Teste do exemplo com código 201: 
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/create" -Method Post
+```
 
 ```bash 
 curl -X POST http://127.0.0.1:5000/create 
@@ -60,6 +68,14 @@ Output esperado da requisição:
 
 Teste da rota com código 400: 
 
+```powershell
+$body = @{
+    invalid_name = "John"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/validate" -Method Post -Body $body -ContentType "application/json"
+```
+
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"invalid_name": "John"}' http://127.0.0.1:5000/validate 
 ``` 
@@ -76,6 +92,10 @@ Output esperado da requisição:
 ``` 
 
 Exemplo da rota com código 401: 
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/private" -Method Get
+```
 
 ```bash 
 curl http://127.0.0.1:5000/private 
@@ -94,6 +114,14 @@ Resposta da requisição esperada:
 
 Teste da rota com código 403: 
 
+```powershell
+$headers = @{
+    "Role" = "user"
+}
+
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/admin" -Method Get -Headers $headers
+```
+
 ```bash 
 curl -H "Role: user" http://127.0.0.1:5000/admin 
 ``` 
@@ -111,6 +139,10 @@ Output esperado:
 
 Exemplo com código 404: 
 
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/item/999" -Method Get
+```
+
 ```bash 
 curl http://127.0.0.1:5000/item/999 
 ``` 
@@ -127,6 +159,10 @@ Output esperado da requisição:
 ```
 
 Teste da rota com código 500: 
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/error" -Method Get
+```
 
 ```bash 
 curl http://127.0.0.1:5000/error 

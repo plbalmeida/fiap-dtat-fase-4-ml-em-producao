@@ -39,6 +39,16 @@ Explicando o exemplo, a classe `UserModel` define o formato esperado dos dados d
 
 Fazemos uma requisição `POST` com dados válidos: 
 
+```powershell
+$body = @{
+    name = "Alice"
+    age = 25
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
+
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Alice", "age": 25}' http://127.0.0.1:5000/users 
 ``` 
@@ -56,6 +66,16 @@ Resposta da requisição:
 ``` 
 
 Agora vamos checar o comportamento da requisição `POST` realizada com dados inválidos (com uma entrada em string para o age, quando o correto seria um inteiro): 
+
+```powershell
+$body = @{
+    name = "Alice"
+    age = "invalid"
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
 
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Alice", "age": "invalid"}' http://127.0.0.1:5000/users 

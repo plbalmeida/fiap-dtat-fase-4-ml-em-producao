@@ -44,6 +44,16 @@ A classe `UserModel` nesse exemplo adiciona dois novos campos:
 
 Agora vamos fazer uma requisição POST com dados opcionais: 
 
+```powershell
+$body = @{
+    name = "Bob"
+    age = 30  # Valor válido para idade
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
+
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Bob", "age": 30}' http://127.0.0.1:5000/users 
 ``` 
@@ -64,6 +74,18 @@ Resposta da requisição:
 
 Agora vamos checar o comportamento da aplicação realizando uma requisição `POST` com todos os campos: 
 
+```powershell
+$body = @{
+    name      = "Charlie"
+    age       = 22
+    email     = "charlie@example.com"
+    is_active = $false
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
+
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Charlie", "age": 22, "email": "charlie@example.com", "is_active": false}' http://127.0.0.1:5000/users 
 ``` 
@@ -83,6 +105,16 @@ Retorno da requisição:
 ``` 
 
 E por fim, vamos verificar o comportamento da aplicação para uma requisição `POST` com dados inválidos: 
+
+```powershell
+$body = @{
+    name = "Charlie"
+    age  = "invalid"
+} | ConvertTo-Json
+
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
 
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Charlie", "age": "invalid"}' http://127.0.0.1:5000/users

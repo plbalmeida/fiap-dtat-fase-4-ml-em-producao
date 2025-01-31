@@ -26,11 +26,11 @@ De acordo com o livro *HTTP: The Definitive Guide*, o protocolo HTTP possui as s
 2. **Conexões Stateless**: Cada requisição HTTP é independente, ou seja, o protocolo não guarda informações sobre requisições anteriores. Isso o torna simples e escalável. 
 
 3. **Métodos HTTP**: Esse protocolo define métodos como: 
-    - GET: Para recuperar dados; 
-    - POST: Para enviar dados ao servidor; 
-    - PUT: Para atualizar ou criar dados; 
-    - DELETE: Para remover dados; 
-    - HEAD: Para obter apenas os cabeçalhos da resposta. 
+    - **GET**: Para recuperar dados; 
+    - **POST**: Para enviar dados ao servidor; 
+    - **PUT**: Para atualizar ou criar dados; 
+    - **DELETE**: Para remover dados; 
+    - **HEAD**: Para obter apenas os cabeçalhos da resposta. 
 
 4. **Mensagens HTTP**: As comunicações consistem em mensagens: 
     - Request (solicitação): Enviada pelo cliente ao servidor; 

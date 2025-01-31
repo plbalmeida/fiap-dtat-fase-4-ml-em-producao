@@ -6,6 +6,11 @@ python app3.py
 
 Agora podemos testar cada método do script. Primeiro vamos testar o exemplo do método `GET` para Recuperar a lista de usuários fazendo a seguinte requisição: 
 
+```powershell
+$response = Invoke-WebRequest -Uri "http://127.0.0.1:5000/users" -Method Get
+$response.Content
+```
+
 ```bash 
 curl -X GET http://127.0.0.1:5000/users 
 ``` 
@@ -27,6 +32,12 @@ Resposta da requisição esperada:
 
 Agora fazemos a requisição no método `POST` para adicionar um novo usuário: 
 
+```powershell
+$body = @{name = "Carlos"} | ConvertTo-Json
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users" -Method Post -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
+
 ```bash 
 curl -X POST -H "Content-Type: application/json" -d '{"name": "Carlos"}' http://127.0.0.1:5000/users 
 ``` 
@@ -46,17 +57,19 @@ Resposta da requisição:
 
 Requisição no método `PUT` para atualizar um usuário existente: 
 
+```powershell
+$body = @{name = "Alice Updated"} | ConvertTo-Json
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users/1" -Method Put -Body $body -ContentType "application/json"
+$response | ConvertTo-Json -Depth 10
+```
+
 ```bash 
 
 curl -X PUT -H "Content-Type: application/json" -d '{"name": "Alice Updated"}' http://127.0.0.1:5000/users/1 
 
 ``` 
 
- 
-
 Retorno da requisição esperado: 
-
- 
 
 ```bash 
 {
@@ -70,6 +83,11 @@ Retorno da requisição esperado:
 ``` 
 
 Requisição no método `DELETE` para excluir um usuário: 
+
+```powershell
+$response = Invoke-RestMethod -Uri "http://127.0.0.1:5000/users/2" -Method Delete
+$response | ConvertTo-Json -Depth 10
+```
 
 ```bash 
 curl -X DELETE http://127.0.0.1:5000/users/2 
@@ -89,6 +107,11 @@ Resposta da requisição esperada:
 ``` 
 
 Requisição no método `HEAD` para verificar se um usuário existe: 
+
+```powershell
+$response = Invoke-WebRequest -Uri "http://127.0.0.1:5000/users/1" -Method Head
+$response.Headers
+```
 
 ```bash 
 curl -I http://127.0.0.1:5000/users/1 
